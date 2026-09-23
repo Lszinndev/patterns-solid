@@ -1,6 +1,6 @@
 package ProjetosJava.modelos;
 
-public enum statusTransacao {
+public enum StatusTransacao {
     SUCESSO,
     FALHA
 }

@@ -1,6 +1,6 @@
 package ProjetosJava.modelos;
 
-public enum statusConta {
+public enum StatusCartao {
     ATIVO,
     BLOQUEADO
 }

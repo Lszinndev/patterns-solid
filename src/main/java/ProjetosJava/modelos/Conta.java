@@ -1,18 +1,62 @@
 package ProjetosJava.modelos;
 
 public class Conta {
-    private String numeroConta;
-    private String agencia;
+    private final String numeroConta;
+    private final String agencia;
+    private final Titular titular;
     private double saldoAtual;
-    private statusConta statusConta;
-    private Titular titular;
+    private StatusConta statusConta;
 
-    public Conta(String numeroConta, String agencia, double saldoAtual, Titular titular) {
+    public Conta(String numeroConta, String agencia, double saldoInicial, Titular titular) {
+        if (titular == null) {
+            throw new IllegalArgumentException("A conta precisa de um titular.");
+        }
+        if (saldoInicial < 0) {
+            throw new IllegalArgumentException("O saldo inicial nao pode ser negativo.");
+        }
         this.numeroConta = numeroConta;
         this.agencia = agencia;
-        this.saldoAtual = saldoAtual;
-        this.statusConta = statusConta.ATIVO;
+        this.saldoAtual = saldoInicial;
         this.titular = titular;
+        this.statusConta = StatusConta.ATIVO;
+    }
+
+    public void creditar(double valor) {
+        validarOperacao(valor);
+        this.saldoAtual += valor;
+    }
+
+    public void debitar(double valor) {
+        validarOperacao(valor);
+        if (valor > this.saldoAtual) {
+            throw new IllegalStateException("Saldo insuficiente.");
+        }
+        this.saldoAtual -= valor;
+    }
+
+    public boolean possuiSaldo(double valor) {
+        return valor <= this.saldoAtual;
+    }
+
+    public void bloquear() {
+        this.statusConta = StatusConta.BLOQUEADO;
+    }
+
+    public void desbloquear() {
+        this.statusConta = StatusConta.ATIVO;
+    }
+
+    public boolean estaAtiva() {
+        return this.statusConta == StatusConta.ATIVO;
+    }
+
+    private void validarOperacao(double valor) {
+        if (!estaAtiva()) {
+            throw new IllegalStateException("Conta bloqueada.");
+        }
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor deve ser maior que zero.");
+        }
     }
 
     public String getNumeroConta() {
@@ -27,33 +71,11 @@ public class Conta {
         return saldoAtual;
     }
 
-    public statusConta getStatusConta() {
+    public StatusConta getStatusConta() {
         return statusConta;
     }
 
     public Titular getTitular() {
         return titular;
-    }
-
-    public void depositar(double saldo, double valorDeposito) {
-        saldo += valorDeposito;
-    }
-
-    public void sacar(double saldo, double valorSaque) {
-        if(valorSaque > saldo) {
-            throw new ArithmeticException("O valor de saque nao pode ser maior que o saldo.");
-        }
-        saldo -= valorSaque;
-    }
-
-    public void transferir(Conta contaOrigem, Conta contaDestino, double valorTransferido) {
-        if (contaDestino == null ) {
-            throw new IllegalArgumentException("Conta invalida!");
-        }
-        if(valorTransferido > saldoAtual) {
-            throw new ArithmeticException("O valor de transferencia nao pode ser maior que o saldo atual.");
-        }
-        contaOrigem.saldoAtual -= valorTransferido;
-        contaDestino.saldoAtual += valorTransferido;
     }
 }

@@ -1,28 +1,45 @@
 package ProjetosJava.modelos;
 
 public class Titular {
-    private String CPF;
+    private final String cpf;
     private String nome;
     private String email;
     private String telefone;
 
-    public Titular(String CPF, String nome, String email, String telefone) {
-        validarCPF(CPF);
-        this.CPF = CPF;
-        this.nome = nome;
+    public Titular(String cpf, String nome, String email, String telefone) {
+        this.cpf = normalizarCpf(cpf);
+        setNome(nome);
         this.email = email;
         this.telefone = telefone;
     }
 
-    private void validarCPF(String CPF) {
-        if (CPF == null || !CPF.replaceAll("[.\\-\\s]", "").matches("\\d{11}")) {
-            throw new IllegalArgumentException("CPF inválido: deve conter exatamente 11 dígitos.");
+    private String normalizarCpf(String cpf) {
+        String digitos = cpf == null ? "" : cpf.replaceAll("[.\\-\\s]", "");
+        if (!cpfValido(digitos)) {
+            throw new IllegalArgumentException("CPF invalido.");
         }
+        return digitos;
     }
 
-    public void setCPF(String CPF) {
-        validarCPF(CPF);
-        this.CPF = CPF;
+    private boolean cpfValido(String digitos) {
+        if (!digitos.matches("\\d{11}") || digitos.chars().distinct().count() == 1) {
+            return false;
+        }
+        return digitoVerificador(digitos, 9) == digitos.charAt(9) - '0'
+                && digitoVerificador(digitos, 10) == digitos.charAt(10) - '0';
+    }
+
+    private int digitoVerificador(String digitos, int posicao) {
+        int soma = 0;
+        for (int i = 0; i < posicao; i++) {
+            soma += (digitos.charAt(i) - '0') * (posicao + 1 - i);
+        }
+        int resto = (soma * 10) % 11;
+        return resto == 10 ? 0 : resto;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     public String getNome() {
@@ -30,6 +47,9 @@ public class Titular {
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("O nome do titular e obrigatorio.");
+        }
         this.nome = nome;
     }
 
