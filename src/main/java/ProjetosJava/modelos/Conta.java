@@ -7,6 +7,14 @@ public class Conta {
     private statusConta statusConta;
     private Titular titular;
 
+    public Conta(String numeroConta, String agencia, double saldoAtual, Titular titular) {
+        this.numeroConta = numeroConta;
+        this.agencia = agencia;
+        this.saldoAtual = saldoAtual;
+        this.statusConta = statusConta.ATIVO;
+        this.titular = titular;
+    }
+
     public String getNumeroConta() {
         return numeroConta;
     }
