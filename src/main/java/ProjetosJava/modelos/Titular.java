@@ -22,24 +22,10 @@ public class Titular {
     }
 
     private boolean cpfValido(String digitos) {
-        if (!digitos.matches("\\d{11}") || digitos.chars().distinct().count() == 1) {
+        if (!digitos.matches("\\d{11}")) {
             return false;
         }
-        return digitoVerificador(digitos, 9) == digitos.charAt(9) - '0'
-                && digitoVerificador(digitos, 10) == digitos.charAt(10) - '0';
-    }
-
-    private int digitoVerificador(String digitos, int posicao) {
-        int soma = 0;
-        for (int i = 0; i < posicao; i++) {
-            soma += (digitos.charAt(i) - '0') * (posicao + 1 - i);
-        }
-        int resto = (soma * 10) % 11;
-        return resto == 10 ? 0 : resto;
-    }
-
-    public String getCpf() {
-        return cpf;
+        return false;
     }
 
     public String getNome() {

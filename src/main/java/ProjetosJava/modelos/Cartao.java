@@ -9,14 +9,19 @@ public class Cartao {
     private StatusCartao statusCartao;
     private int numeroTentativas;
 
-    public Cartao(String numeroCartao, int codigoHash, Conta conta) {
+    public Cartao(String numeroCartao, String senha, Conta conta) {
         if (conta == null) {
             throw new IllegalArgumentException("O cartao precisa estar vinculado a uma conta.");
         }
+        if (senha == null || !senha.matches("\\d{4,6}")) {
+            throw new IllegalArgumentException("A senha deve conter de 4 a 6 digitos numericos.");
+        }
+
         this.numeroCartao = numeroCartao;
-        this.codigoHash = codigoHash;
         this.conta = conta;
         this.statusCartao = StatusCartao.ATIVO;
+        this.numeroTentativas = 0;
+        this.codigoHash = gerarHash(senha);
     }
 
     public boolean validarSenha(int hashSenhaInformada) {
@@ -33,6 +38,10 @@ public class Cartao {
         return false;
     }
 
+    private int gerarHash(String senha) {
+        return senha.hashCode();
+    }
+
     private void registrarTentativaFalha() {
         this.numeroTentativas++;
         if (this.numeroTentativas >= MAX_TENTATIVAS) {
@@ -44,19 +53,11 @@ public class Cartao {
         return this.statusCartao == StatusCartao.BLOQUEADO;
     }
 
-    public String getNumeroCartao() {
-        return numeroCartao;
-    }
-
     public Conta getConta() {
         return conta;
     }
 
     public StatusCartao getStatusCartao() {
         return statusCartao;
-    }
-
-    public int getNumeroTentativas() {
-        return numeroTentativas;
     }
 }
