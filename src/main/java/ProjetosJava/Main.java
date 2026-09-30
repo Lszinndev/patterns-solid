@@ -17,9 +17,9 @@ import ProjetosJava.modelos.Titular;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("==================================================");
+        System.out.println("=================================================");
         System.out.println("SISTEMA DE TERMINAL BANCARIO / ATM");
-        System.out.println("==================================================\n");
+        System.out.println("=================================================\n");
 
         Titular titular1 = new Titular("12345678901", "Alaertes Junior", "alaertes@email.com", "11999990001");
         Conta conta1 = new Conta("1001-1", "0001", 1500.0, titular1);
@@ -62,6 +62,6 @@ public class Main {
 
         System.out.printf("Saldo Final Origem (%s): R$ %.2f\n", conta1.getTitular().getNome(), conta1.getSaldoAtual());
         System.out.printf("Saldo Final Destino (%s): R$ %.2f\n", conta2.getTitular().getNome(), conta2.getSaldoAtual());
-        System.out.println("\n==================================================");
+        System.out.println("\n=================================================");
     }
 }
