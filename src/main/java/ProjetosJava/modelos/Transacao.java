@@ -1,7 +1,8 @@
 package ProjetosJava.modelos;
 
 public class Transacao {
-    private int idTransacao = 0;
+    private static int contadorId = 0;
+    private final int idTransacao;
     private final TipoTransacao tipoTransacao;
     private final double valorTransacao;
     private final StatusTransacao statusTransacao;
@@ -12,7 +13,7 @@ public class Transacao {
         if (tipoTransacao == null || statusTransacao == null || conta == null) {
             throw new IllegalArgumentException("Tipo, status e conta da transacao sao obrigatorios.");
         }
-        idTransacao++;
+        this.idTransacao = ++contadorId;
         this.tipoTransacao = tipoTransacao;
         this.valorTransacao = valorTransacao;
         this.statusTransacao = statusTransacao;

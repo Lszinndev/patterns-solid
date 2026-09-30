@@ -25,7 +25,7 @@ public class Titular {
         if (!digitos.matches("\\d{11}")) {
             return false;
         }
-        return false;
+        return true;
     }
 
     public String getNome() {
