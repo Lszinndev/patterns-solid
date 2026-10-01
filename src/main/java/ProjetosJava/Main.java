@@ -50,7 +50,7 @@ public class Main {
             sessaoTerminal.encerrarSessao();
         }
 
-        System.out.println("\n--------------------------------------------------");
+        System.out.println("\n-------------------------------------------------");
         System.out.println("--- CENARIO 2: Transferencia entre Contas com Notificacao por E-mail ---");
         System.out.printf("Saldo Origem (%s): R$ %.2f\n", conta1.getTitular().getNome(), conta1.getSaldoAtual());
         System.out.printf("Saldo Destino (%s): R$ %.2f\n", conta2.getTitular().getNome(), conta2.getSaldoAtual());
