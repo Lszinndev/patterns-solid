@@ -1,8 +1,6 @@
 package ProjetosJava.modelos;
 
 public class Transacao {
-    private static int contadorId = 0;
-    private final int idTransacao;
     private final TipoTransacao tipoTransacao;
     private final double valorTransacao;
     private final StatusTransacao statusTransacao;
@@ -13,15 +11,10 @@ public class Transacao {
         if (tipoTransacao == null || statusTransacao == null || conta == null) {
             throw new IllegalArgumentException("Tipo, status e conta da transacao sao obrigatorios.");
         }
-        this.idTransacao = ++contadorId;
         this.tipoTransacao = tipoTransacao;
         this.valorTransacao = valorTransacao;
         this.statusTransacao = statusTransacao;
         this.conta = conta;
-    }
-
-    public int getIdTransacao() {
-        return idTransacao;
     }
 
     public TipoTransacao getTipoTransacao() {
@@ -34,10 +27,6 @@ public class Transacao {
 
     public StatusTransacao getStatusTransacao() {
         return statusTransacao;
-    }
-
-    public Conta getConta() {
-        return conta;
     }
 
     public String obterResumoFormatado() {

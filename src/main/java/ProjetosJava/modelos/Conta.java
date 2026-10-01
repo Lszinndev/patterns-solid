@@ -5,7 +5,7 @@ public class Conta {
     private final String agencia;
     private final Titular titular;
     private double saldoAtual;
-    private StatusConta statusConta;
+    private boolean ativa;
 
     public Conta(String numeroConta, String agencia, double saldoInicial, Titular titular) {
         if (titular == null) {
@@ -18,7 +18,7 @@ public class Conta {
         this.agencia = agencia;
         this.saldoAtual = saldoInicial;
         this.titular = titular;
-        this.statusConta = StatusConta.ATIVO;
+        this.ativa = true;
     }
 
     public void creditar(double valor) {
@@ -34,20 +34,12 @@ public class Conta {
         this.saldoAtual -= valor;
     }
 
-    public boolean possuiSaldo(double valor) {
-        return valor <= this.saldoAtual;
-    }
-
     public void bloquear() {
-        this.statusConta = StatusConta.BLOQUEADO;
-    }
-
-    public void desbloquear() {
-        this.statusConta = StatusConta.ATIVO;
+        this.ativa = false;
     }
 
     public boolean estaAtiva() {
-        return this.statusConta == StatusConta.ATIVO;
+        return this.ativa;
     }
 
     private void validarOperacao(double valor) {
@@ -69,10 +61,6 @@ public class Conta {
 
     public double getSaldoAtual() {
         return saldoAtual;
-    }
-
-    public StatusConta getStatusConta() {
-        return statusConta;
     }
 
     public Titular getTitular() {

@@ -6,7 +6,7 @@ public class Cartao {
     private final String numeroCartao;
     private final int codigoHash;
     private final Conta conta;
-    private StatusCartao statusCartao;
+    private boolean bloqueado;
     private int numeroTentativas;
 
     public Cartao(String numeroCartao, String senha, Conta conta) {
@@ -19,7 +19,7 @@ public class Cartao {
 
         this.numeroCartao = numeroCartao;
         this.conta = conta;
-        this.statusCartao = StatusCartao.ATIVO;
+        this.bloqueado = false;
         this.numeroTentativas = 0;
         this.codigoHash = gerarHash(senha);
     }
@@ -45,19 +45,15 @@ public class Cartao {
     private void registrarTentativaFalha() {
         this.numeroTentativas++;
         if (this.numeroTentativas >= MAX_TENTATIVAS) {
-            this.statusCartao = StatusCartao.BLOQUEADO;
+            this.bloqueado = true;
         }
     }
 
     public boolean estaBloqueado() {
-        return this.statusCartao == StatusCartao.BLOQUEADO;
+        return this.bloqueado;
     }
 
     public Conta getConta() {
         return conta;
-    }
-
-    public StatusCartao getStatusCartao() {
-        return statusCartao;
     }
 }

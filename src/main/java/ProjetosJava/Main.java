@@ -8,6 +8,7 @@ import ProjetosJava.controladores.SessaoTerminalService;
 import ProjetosJava.implementacao.AutenticadorSenhaNumerica;
 import ProjetosJava.implementacao.NotificadorEmail;
 import ProjetosJava.implementacao.NotificadorSMS;
+import ProjetosJava.implementacao.OperacaoDeposito;
 import ProjetosJava.implementacao.OperacaoSaque;
 import ProjetosJava.implementacao.OperacaoTransferencia;
 import ProjetosJava.modelos.Cartao;
@@ -62,6 +63,18 @@ public class Main {
 
         System.out.printf("Saldo Final Origem (%s): R$ %.2f\n", conta1.getTitular().getNome(), conta1.getSaldoAtual());
         System.out.printf("Saldo Final Destino (%s): R$ %.2f\n", conta2.getTitular().getNome(), conta2.getSaldoAtual());
+
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("--- CENARIO 3: Deposito em Conta com Notificacao por SMS ---");
+        System.out.printf("Saldo anterior do Titular (%s): R$ %.2f\n", conta1.getTitular().getNome(), conta1.getSaldoAtual());
+
+        Notificador notificadorSmsDeposito = new NotificadorSMS();
+        ProcessadorTransacaoService processadorDeposito = new ProcessadorTransacaoService(notificadorSmsDeposito);
+
+        OperacaoBancaria deposito = new OperacaoDeposito();
+        processadorDeposito.processar(deposito, conta1, 500.0, TipoTransacao.DEPOSITO);
+
+        System.out.printf("Saldo apos deposito (%s): R$ %.2f\n", conta1.getTitular().getNome(), conta1.getSaldoAtual());
         System.out.println("\n=================================================");
     }
 }

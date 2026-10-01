@@ -3,8 +3,8 @@ package ProjetosJava.modelos;
 public class Titular {
     private final String cpf;
     private String nome;
-    private String email;
-    private String telefone;
+    private final String email;
+    private final String telefone;
 
     public Titular(String cpf, String nome, String email, String telefone) {
         this.cpf = normalizarCpf(cpf);
@@ -43,15 +43,7 @@ public class Titular {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getTelefone() {
         return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 }

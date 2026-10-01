@@ -24,8 +24,4 @@ public class OperacaoTransferencia implements OperacaoBancaria {
         contaOrigem.debitar(valor);
         contaDestino.creditar(valor);
     }
-
-    public Conta getContaDestino() {
-        return contaDestino;
-    }
 }
