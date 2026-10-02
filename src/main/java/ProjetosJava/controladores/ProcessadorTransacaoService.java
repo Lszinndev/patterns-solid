@@ -1,8 +1,8 @@
 package ProjetosJava.controladores;
 
+import ProjetosJava.contratos.Conta;
 import ProjetosJava.contratos.Notificador;
 import ProjetosJava.contratos.OperacaoBancaria;
-import ProjetosJava.modelos.Conta;
 import ProjetosJava.modelos.StatusTransacao;
 import ProjetosJava.modelos.TipoTransacao;
 import ProjetosJava.modelos.Transacao;
@@ -32,7 +32,7 @@ public class ProcessadorTransacaoService {
 			status = StatusTransacao.FALHA;
 		}
 
-		Transacao transacao = new Transacao(tipoTransacao, valor, status, conta);
+		Transacao transacao = new Transacao(tipoTransacao, valor, status);
 		notificador.notificar(conta.getTitular(), transacao.obterResumoFormatado()
 				+ " - " + status);
 		return transacao;

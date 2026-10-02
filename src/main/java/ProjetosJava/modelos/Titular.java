@@ -2,13 +2,13 @@ package ProjetosJava.modelos;
 
 public class Titular {
     private final String cpf;
-    private String nome;
+    private final String nome;
     private final String email;
     private final String telefone;
 
     public Titular(String cpf, String nome, String email, String telefone) {
         this.cpf = normalizarCpf(cpf);
-        setNome(nome);
+        this.nome = validarNome(nome);
         this.email = email;
         this.telefone = telefone;
     }
@@ -28,15 +28,15 @@ public class Titular {
         return true;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
+    private String validarNome(String nome) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("O nome do titular e obrigatorio.");
         }
-        this.nome = nome;
+        return nome;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public String getEmail() {

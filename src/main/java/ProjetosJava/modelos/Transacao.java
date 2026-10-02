@@ -4,29 +4,17 @@ public class Transacao {
     private final TipoTransacao tipoTransacao;
     private final double valorTransacao;
     private final StatusTransacao statusTransacao;
-    private final Conta conta;
 
-    public Transacao(TipoTransacao tipoTransacao, double valorTransacao,
-                     StatusTransacao statusTransacao, Conta conta) {
-        if (tipoTransacao == null || statusTransacao == null || conta == null) {
-            throw new IllegalArgumentException("Tipo, status e conta da transacao sao obrigatorios.");
+    public Transacao(TipoTransacao tipoTransacao, double valorTransacao, StatusTransacao statusTransacao) {
+        if (tipoTransacao == null || statusTransacao == null) {
+            throw new IllegalArgumentException("Tipo e status da transacao sao obrigatorios.");
+        }
+        if (valorTransacao <= 0) {
+            throw new IllegalArgumentException("O valor da transacao deve ser maior que zero.");
         }
         this.tipoTransacao = tipoTransacao;
         this.valorTransacao = valorTransacao;
         this.statusTransacao = statusTransacao;
-        this.conta = conta;
-    }
-
-    public TipoTransacao getTipoTransacao() {
-        return tipoTransacao;
-    }
-
-    public double getValorTransacao() {
-        return valorTransacao;
-    }
-
-    public StatusTransacao getStatusTransacao() {
-        return statusTransacao;
     }
 
     public String obterResumoFormatado() {

@@ -1,8 +1,8 @@
 package ProjetosJava.controladores;
 
 import ProjetosJava.contratos.Autenticador;
+import ProjetosJava.contratos.Conta;
 import ProjetosJava.modelos.Cartao;
-import ProjetosJava.modelos.Conta;
 
 public class SessaoTerminalService {
 

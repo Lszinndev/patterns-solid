@@ -1,7 +1,7 @@
 package ProjetosJava.implementacao;
 
+import ProjetosJava.contratos.Conta;
 import ProjetosJava.contratos.OperacaoBancaria;
-import ProjetosJava.modelos.Conta;
 
 public class OperacaoDeposito implements OperacaoBancaria {
 

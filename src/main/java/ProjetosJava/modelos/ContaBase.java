@@ -1,13 +1,15 @@
 package ProjetosJava.modelos;
 
-public class Conta {
+import ProjetosJava.contratos.Conta;
+
+public class ContaBase implements Conta {
     private final String numeroConta;
     private final String agencia;
     private final Titular titular;
     private double saldoAtual;
     private boolean ativa;
 
-    public Conta(String numeroConta, String agencia, double saldoInicial, Titular titular) {
+    public ContaBase(String numeroConta, String agencia, double saldoInicial, Titular titular) {
         if (titular == null) {
             throw new IllegalArgumentException("A conta precisa de um titular.");
         }
@@ -21,11 +23,13 @@ public class Conta {
         this.ativa = true;
     }
 
+    @Override
     public void creditar(double valor) {
         validarOperacao(valor);
         this.saldoAtual += valor;
     }
 
+    @Override
     public void debitar(double valor) {
         validarOperacao(valor);
         if (valor > this.saldoAtual) {
@@ -34,10 +38,12 @@ public class Conta {
         this.saldoAtual -= valor;
     }
 
+    @Override
     public void bloquear() {
         this.ativa = false;
     }
 
+    @Override
     public boolean estaAtiva() {
         return this.ativa;
     }
@@ -51,18 +57,22 @@ public class Conta {
         }
     }
 
+    @Override
     public String getNumeroConta() {
         return numeroConta;
     }
 
+    @Override
     public String getAgencia() {
         return agencia;
     }
 
+    @Override
     public double getSaldoAtual() {
         return saldoAtual;
     }
 
+    @Override
     public Titular getTitular() {
         return titular;
     }

@@ -1,5 +1,7 @@
 package ProjetosJava.modelos;
 
+import ProjetosJava.contratos.Conta;
+
 public class Cartao {
     private static final int MAX_TENTATIVAS = 3;
 

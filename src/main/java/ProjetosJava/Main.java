@@ -1,6 +1,7 @@
 package ProjetosJava;
 
 import ProjetosJava.contratos.Autenticador;
+import ProjetosJava.contratos.Conta;
 import ProjetosJava.contratos.Notificador;
 import ProjetosJava.contratos.OperacaoBancaria;
 import ProjetosJava.controladores.ProcessadorTransacaoService;
@@ -12,7 +13,7 @@ import ProjetosJava.implementacao.OperacaoDeposito;
 import ProjetosJava.implementacao.OperacaoSaque;
 import ProjetosJava.implementacao.OperacaoTransferencia;
 import ProjetosJava.modelos.Cartao;
-import ProjetosJava.modelos.Conta;
+import ProjetosJava.modelos.ContaBase;
 import ProjetosJava.modelos.TipoTransacao;
 import ProjetosJava.modelos.Titular;
 
@@ -23,11 +24,11 @@ public class Main {
         System.out.println("=================================================\n");
 
         Titular titular1 = new Titular("12345678901", "Alaertes Junior", "alaertes@email.com", "11999990001");
-        Conta conta1 = new Conta("1001-1", "0001", 1500.0, titular1);
+        Conta conta1 = new ContaBase("1001-1", "0001", 1500.0, titular1);
         Cartao cartao1 = new Cartao("4002-8922", "1234", conta1);
 
         Titular titular2 = new Titular("98765432100", "Caio Azevedo", "caio@email.com", "11999990002");
-        Conta conta2 = new Conta("2002-2", "0001", 300.0, titular2);
+        Conta conta2 = new ContaBase("2002-2", "0001", 300.0, titular2);
 
         System.out.println("--- CENARIO 1: Saque no Terminal com Notificacao por SMS ---");
         Autenticador autenticador = new AutenticadorSenhaNumerica();
