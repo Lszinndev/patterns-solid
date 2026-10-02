@@ -39,11 +39,6 @@ public class ContaBase implements Conta {
     }
 
     @Override
-    public void bloquear() {
-        this.ativa = false;
-    }
-
-    @Override
     public boolean estaAtiva() {
         return this.ativa;
     }
@@ -55,16 +50,6 @@ public class ContaBase implements Conta {
         if (valor <= 0) {
             throw new IllegalArgumentException("O valor deve ser maior que zero.");
         }
-    }
-
-    @Override
-    public String getNumeroConta() {
-        return numeroConta;
-    }
-
-    @Override
-    public String getAgencia() {
-        return agencia;
     }
 
     @Override
